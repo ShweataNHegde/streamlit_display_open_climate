@@ -18,18 +18,18 @@ def get_filter_list(df, column_name, separator):
     unique_entities = list(set(all_entitites))
     return unique_entities
 
-
+col1, col2 = st.columns(2)
 df = get_data(CSV_FILE)
 df_with_id = get_report_details(df, 'para_id')
 all_countries_unique = get_filter_list(df_with_id, 'countries', SEPARATOR)
-'## By country'
-select_country = st.multiselect("Select Countries:", all_countries_unique)
-all_options_country = st.checkbox("Select all options")
+col1.write('### By country')
+select_country = col1.multiselect("Select Countries:", all_countries_unique)
+all_options_country = col1.checkbox("Select all options")
 if all_options_country:
     select_country = all_countries_unique
-'## By IPCC Report'
+col2.write('### By IPCC Report')
 all_reports = get_filter_list(df_with_id, 'id', SEPARATOR)
-select_report = st.multiselect("Select Reports:", all_reports)
+select_report = col2.multiselect("Select Reports:", all_reports)
 
 #all_climate_terms = get_filter_list(df,'1')
 #country = st.selectbox('Country', selected_options)
